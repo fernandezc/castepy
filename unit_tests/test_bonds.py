@@ -10,7 +10,7 @@ class TestBonds(unittest.TestCase):
       Check basic bond parser is working for example of ethanol.
     """
 
-    parsed_bonds = parse_bonds(open(self.calc1_path + ".castep").read()).next()
+    parsed_bonds = next(parse_bonds(open(self.calc1_path + ".castep").read()))
 
     # Make sure we parse all the bonds
     self.assertEqual(len(parsed_bonds), 32)
@@ -23,7 +23,7 @@ class TestBonds(unittest.TestCase):
     #c = cell.Cell(open("%s.cell" % self.calc1_path).read())
     castep_file = open("%s.castep" % self.calc1_path).read()
 
-    bonds = BondsResult.load(castep_file).next()
+    bonds = next(BondsResult.load(castep_file))
 
     self.assertEqual(len(bonds.bonds), 8)
     self.assertEqual(len(bonds.index[('C',1)]), 4)
@@ -43,7 +43,7 @@ class TestBonds(unittest.TestCase):
 
     castep_file = open("%s.castep" % self.calc1_path).read()
 
-    bonds = BondsResult.load(castep_file).next()
+    bonds = next(BondsResult.load(castep_file))
 
     self.assertTrue(('C',2) in bonds.common(('C',1),('O',1)))
     self.assertTrue(('O',1) in bonds.common(('H',6),('C',2)))

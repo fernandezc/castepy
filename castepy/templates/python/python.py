@@ -17,7 +17,7 @@ def make(source_dir, source_name, target_dir, target_name=None):
 
   sh_source = open(os.path.join(py_path, "python.sh")).read()
   sh_target_file = open(sh_target, "w+")
-  print >>sh_target_file, sh_source % sh_context
+  print(sh_source % sh_context, file=sh_target_file)
   sh_target_file.close()
 
 if __name__ == "__main__":

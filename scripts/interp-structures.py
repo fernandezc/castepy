@@ -12,5 +12,5 @@ for ion1 in c1.ions:
 
   ion1.p = (1.0-t)*array(ion1.p) + t*array(ion2.p)
 
-print c1
+print(c1)
 

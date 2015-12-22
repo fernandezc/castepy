@@ -25,7 +25,7 @@ def make(source_dir, source_name, target_dir):
 
   cell_out = open(target_cell, "w+")
 
-  print >>cell_out, str(c)
+  print(str(c), file=cell_out)
 
 if __name__ == "__main__":
   source_calc = str(sys.argv[1])

@@ -25,7 +25,7 @@ regex_species = re.compile('([A-Za-z]+)([0-9]+)')
 def make_command(args):
   a = parser.parse_args(args)
 
-  print a.__dict__
+  print((a.__dict__))
 
   sites = []
   if a.site is not None:
@@ -34,7 +34,7 @@ def make_command(args):
   else:
     sites = [None]
 
-  cut_off_energies = map(int,a.cut_off_energy.split(","))
+  cut_off_energies = list(map(int,a.cut_off_energy.split(",")))
   xc_functionals = [s.lower() for s in a.xc_functional.split(",")]
   pots = a.pot.split(",")
   sources = a.source
@@ -65,7 +65,7 @@ def make_command(args):
     if len(sites) > 1:
       dir_path.append("".join(site))
 
-    print dir_path
+    print(dir_path)
 
     new_dir = False
 
@@ -103,8 +103,8 @@ def make_command(args):
 
       task.make(target_dir)
 
-    except JcouplingTask.SiteNotPresent, e:
-      print e
+    except JcouplingTask.SiteNotPresent as e:
+      print(e)
 
       # If we've just made this directory, trash it
       if new_dir:

@@ -44,14 +44,14 @@ class JcouplingTask(object):
     if species_matches:
       self.jc_s = species_matches[0][0]
       self.jc_i = int(species_matches[0][1])
-      jsiteraw = raw_input("Specify the j-coupling site ({:s} {:d}): ".format(jc_s, jc_i))
+      jsiteraw = input("Specify the j-coupling site ({:s} {:d}): ".format(jc_s, jc_i))
 
       if jsiteraw:
         j_site = jsiteraw.split()
         self.jc_s = j_site[0]
         self.jc_i = int(j_site[1])
     else:
-      jsiteraw = raw_input("Specify the j-coupling site: ")
+      jsiteraw = input("Specify the j-coupling site: ")
 
       j_site = jsiteraw.split()
       self.jc_s = j_site[0]
@@ -137,7 +137,7 @@ class JcouplingTask(object):
          open(param_target, "w+") as param_target_file, \
          open(cell_target, "w+") as cell_target_file:
 
-      print >>sh_target_file, submission_script
-      print >>param_target_file, self.params
-      print >>cell_target_file, self.cell
+      print(submission_script, file=sh_target_file)
+      print(self.params, file=param_target_file)
+      print(self.cell, file=cell_target_file)
 

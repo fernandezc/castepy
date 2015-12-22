@@ -33,7 +33,7 @@ def make_task(task, args):
 
 def inquire_num_cores():
   num_cores = 32
-  num_cores_raw = raw_input("How many cores? (%d): " % (num_cores))
+  num_cores_raw = eval(input("How many cores? (%d): " % (num_cores)))
   
   try:
     num_cores = int(num_cores_raw)
@@ -44,7 +44,7 @@ def inquire_num_cores():
 
 if __name__ == "__main__":
   if len(sys.argv) < 2:
-    print "Available tasks:", ", ".join(tasks)
+    print(("Available tasks:", ", ".join(tasks)))
     sys.exit()
 
   task = str(sys.argv[1])

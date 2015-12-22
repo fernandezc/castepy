@@ -36,9 +36,9 @@ if __name__ == "__main__":
     dir, file = os.path.split(script)
     seed, ext = os.path.splitext(file)
 
-    print >>f_sh, "cd %s" % pipes.quote(dir)
-    print >>f_sh, "echo %s" % pipes.quote(dir)
-    print >>f_sh, "%s %s" % (CASTEP_PATH, pipes.quote(seed))
-    print >>f_sh, "cd %s" % pipes.quote(root_path)
+    print("cd %s" % pipes.quote(dir), file=f_sh)
+    print("echo %s" % pipes.quote(dir), file=f_sh)
+    print("%s %s" % (CASTEP_PATH, pipes.quote(seed)), file=f_sh)
+    print("cd %s" % pipes.quote(root_path), file=f_sh)
 
-  os.chmod(script_path, 0755)
+  os.chmod(script_path, 0o755)

@@ -33,8 +33,8 @@ if __name__ == "__main__":
   for script in found_all:
     dir, file = os.path.split(script)
 
-    print >>f_sh, "cd %s" % pipes.quote(dir)
-    print >>f_sh, "qsub %s" % pipes.quote(file)
-    print >>f_sh, "cd %s" % pipes.quote(root_path)
+    print("cd %s" % pipes.quote(dir), file=f_sh)
+    print("qsub %s" % pipes.quote(file), file=f_sh)
+    print("cd %s" % pipes.quote(root_path), file=f_sh)
 
-  os.chmod(script_path, 0755)
+  os.chmod(script_path, 0o755)

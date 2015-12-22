@@ -138,28 +138,28 @@ class OldMagresResult:
         self.ms = True
         self.atoms[index]['ms'] = {}
         for tensor in shielding_tensors:
-          self.atoms[index]['ms'][tensor[0]] = map(float, tensor[1:])
+          self.atoms[index]['ms'][tensor[0]] = list(map(float, tensor[1:]))
 
       efg_tensors = efg_tensor_regex.findall(atom[2])
       if len(efg_tensors) != 0:
         self.efg = True
         self.atoms[index]['efg'] = {}
         for tensor in efg_tensors:
-          self.atoms[index]['efg'][tensor[0]] = map(float, tensor[1:])
+          self.atoms[index]['efg'][tensor[0]] = list(map(float, tensor[1:]))
 
       jc_tensors = jc_tensor_regex.findall(atom[2])
       if len(jc_tensors) != 0:
         self.jc = True
         self.atoms[index]['jc']  = {}
         for tensor in jc_tensors:
-          self.atoms[index]['jc'][tensor[0]] = map(float, tensor[1:])
+          self.atoms[index]['jc'][tensor[0]] = list(map(float, tensor[1:]))
           
 
   def annotate(self, ions):
     """
       Given an ion collection, add the nmr information to each ion object.
     """
-    print >>sys.stderr,"Annotating"
+    print("Annotating", file=sys.stderr)
     if self.jc:
       # If doing J-coupling, find the perturbing atom. It should be missing from our magres atoms list.
       # The perturbing atom is actually in the .magres file but the regex doesn't pick it up.
@@ -177,7 +177,7 @@ class OldMagresResult:
 
       self.jc_ion = (jc_ion_s, jc_ion_i)
 
-    for (s, i), magres in self.atoms.items():
+    for (s, i), magres in list(self.atoms.items()):
       ion = ions.get_species(s, i)
 
       ion.magres = {}

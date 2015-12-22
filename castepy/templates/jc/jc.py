@@ -34,7 +34,7 @@ parser.add_argument('-c', '--cut_off_energy', type=str, help='The cut-off energy
 def make_command(args):
   a = parser.parse_args(args)
 
-  print a.__dict__
+  print(a.__dict__)
 
   sites = []
   if a.site is not None:
@@ -43,7 +43,7 @@ def make_command(args):
   else:
     sites = [None]
 
-  cut_off_energies = map(int,a.cut_off_energy.split(","))
+  cut_off_energies = list(map(int,a.cut_off_energy.split(",")))
   xc_functionals = [s.lower() for s in a.xc_functional.split(",")]
   pots = a.pot.split(",")
   sources = a.source
@@ -74,7 +74,7 @@ def make_command(args):
     if len(sites) > 1:
       dir_path.append("".join(site))
 
-    print dir_path
+    print(dir_path)
 
     new_dir = False
 
@@ -112,8 +112,8 @@ def make_command(args):
 
       task.make(target_dir)
 
-    except SiteNotPresent, e:
-      print e
+    except SiteNotPresent as e:
+      print(e)
 
       # If we've just made this directory, trash it
       if new_dir:
@@ -153,14 +153,14 @@ class JcouplingTask(object):
     if species_matches:
       self.jc_s = species_matches[0][0]
       self.jc_i = int(species_matches[0][1])
-      jsiteraw = raw_input("Specify the j-coupling site ({:s} {:d}): ".format(jc_s, jc_i))
+      jsiteraw = input("Specify the j-coupling site ({:s} {:d}): ".format(jc_s, jc_i))
 
       if jsiteraw:
         j_site = jsiteraw.split()
         self.jc_s = j_site[0]
         self.jc_i = int(j_site[1])
     else:
-      jsiteraw = raw_input("Specify the j-coupling site: ")
+      jsiteraw = input("Specify the j-coupling site: ")
 
       j_site = jsiteraw.split()
       self.jc_s = j_site[0]
@@ -240,9 +240,9 @@ class JcouplingTask(object):
     param_target_file = open(param_target, "w+")
     cell_target_file = open(cell_target, "w+")
 
-    print >>sh_target_file, submission_script
-    print >>param_target_file, self.params
-    print >>cell_target_file, cell
+    print(submission_script, file=sh_target_file)
+    print(self.params, file=param_target_file)
+    print(cell, file=cell_target_file)
 
     sh_target_file.close()
     param_target_file.close()

@@ -3,7 +3,7 @@ import math
 import numpy
 import re
 
-from atom import Atom, AtomImage
+from .atom import Atom, AtomImage
 
 class ListPropertyView(list):
   """
@@ -217,7 +217,7 @@ class AtomsView(object):
       if not any_j and i < 0:
         break
 
-    images = sorted(images, key=lambda (d,p): d)
+    images = sorted(images, key=lambda d_p: d_p[0])
 
     return images
 

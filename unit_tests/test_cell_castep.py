@@ -14,14 +14,14 @@ class TestCell(unittest.TestCase):
     """
 
     for f in os.listdir(self.cells_path):
-      print f
+      print(f)
 
       path = os.path.join(self.cells_path, f)
 
       try:
         c = cell.Cell(open(path).read())
-      except Exception, e:
-        print type(e), e
+      except Exception as e:
+        print((type(e), e))
     
 
 if __name__ == "__main__":

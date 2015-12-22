@@ -19,7 +19,7 @@ def parse_bands(bands):
   num_electrons = float(re_num_electrons.findall(bands)[0])
   num_eigenvalues = int(re_num_eigenvalues.findall(bands)[0])
   fermi_energy = float(re_fermi_energy.findall(bands)[0])
-  unit_cell = map(float,re_unit_cell.findall(bands)[0])
+  unit_cell = list(map(float,re_unit_cell.findall(bands)[0]))
   kpoints = re_kpoint.findall(bands)
 
 
@@ -46,7 +46,7 @@ def parse_bands(bands):
 
     for spin, bands in spin_bands:
       spin_result = {'index': int(spin),
-                     'bands': map(float, bands.split())}
+                     'bands': list(map(float, bands.split()))}
 
       kpoint_result['spins'].append(spin_result)
 
@@ -58,4 +58,4 @@ def parse_bands(bands):
 if __name__ == "__main__":
   result = parse_bands(open(sys.argv[1]).read())
 
-  print result
+  print(result)

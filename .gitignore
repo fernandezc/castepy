@@ -8,3 +8,4 @@ test_data/castep_params/*.cell
 notebooks/test/
 notebooks/.ipynb_checkpoints
 
+*.bak

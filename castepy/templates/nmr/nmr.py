@@ -62,7 +62,7 @@ def make(source, target_dir, target_name=None, num_cores=32, queue="parallel.q",
 
     pot.link_files(required_files, target_dir)
   else:
-    print rel_pot
+    print(rel_pot)
     pot.add_potentials_usp(c, rel_pot)
 
   if target_name is None:
@@ -92,12 +92,12 @@ def make(source, target_dir, target_name=None, num_cores=32, queue="parallel.q",
   else:
     params.magres_task = "nmr"
 
-  print >>sh_target_file, sh_source % sh_context
-  print >>param_target_file, params
+  print(sh_source % sh_context, file=sh_target_file)
+  print(params, file=param_target_file)
   
   cell_out = open(cell_target, "w+")
 
-  print >>cell_out, c
+  print(c, file=cell_out)
 
   sh_target_file.close()
 

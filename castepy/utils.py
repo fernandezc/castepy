@@ -1,5 +1,5 @@
 import os
-import settings
+from . import settings
 
 def calc_from_path(path):
   """

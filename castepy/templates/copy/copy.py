@@ -26,9 +26,9 @@ def make(source_dir, source_name, target_dir):
         os.symlink(source, target)
 
   cell_out = open(target_cell, "w+")
-  print >>cell_out, calc.cell_file
+  print(calc.cell_file, file=cell_out)
   param_out = open(target_param, "w+")
-  print >>param_out, calc.param_file
+  print(calc.param_file, file=param_out)
 
 if __name__ == "__main__":
   source_calc = str(sys.argv[1])

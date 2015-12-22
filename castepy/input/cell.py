@@ -115,12 +115,12 @@ class Cell:
 
       if len(block) == 3:
         units = block[0]
-        a, b, c = map(float, block[1].split())
-        alpha, beta, gamma = map(float, block[2].split())
+        a, b, c = list(map(float, block[1].split()))
+        alpha, beta, gamma = list(map(float, block[2].split()))
       elif len(block) == 2:
         units = "ang"
-        a, b, c = map(float, block[0].split())
-        alpha, beta, gamma = map(float, block[1].split())
+        a, b, c = list(map(float, block[0].split()))
+        alpha, beta, gamma = list(map(float, block[1].split()))
 
       alpha = alpha * pi / 180.0
       beta = beta * pi / 180.0
@@ -248,7 +248,7 @@ class Cell:
                 dr, _ = self.ions.least_mirror(ion1.position, ion2.position)
 
                 if dr < 0.01:
-                  print ion1, ion2
+                  print((ion1, ion2))
                   to_remove.add(ion2)
 
         return AtomsView([atom for atom in self.ions if atom not in to_remove],
@@ -259,13 +259,13 @@ class Cell:
         self.regen_lattice_block()
         
         out = []
-        for name, lines in self.blocks.items():
+        for name, lines in list(self.blocks.items()):
             out.append("%block {}".format(name))
             out += lines
             out.append("%endblock {}".format(name))
             out.append("")
 
-        for key, value in self.otherdict.items():
+        for key, value in list(self.otherdict.items()):
             if value is not None:
               out.append("{}: {}".format(key, value))
             else:

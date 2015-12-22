@@ -128,7 +128,7 @@ class PspOtfg(object):
     else:
       raise Exception("Unknown pipe section")
 
-    self.energy_test = map(float, pipesplit[-4:-1])
+    self.energy_test = list(map(float, pipesplit[-4:-1]))
 
     self.projectors = re.findall("(.*?)([\(\[{]|$)", pipesplit[-1])[0][0].split(":")
 
@@ -174,7 +174,7 @@ class PspOtfg(object):
     if self.flags:
       out.append("(")
       flags = []
-      for key, value in self.flags.items():
+      for key, value in list(self.flags.items()):
         if value:
           flags.append("{}={}".format(key, value))
         else:
@@ -190,10 +190,10 @@ class PspOtfg(object):
 
 
 if __name__ == "__main__":
-  for s, otfg_str in otfgs[8].items():
-    print s, otfg_str
+  for s, otfg_str in list(otfgs[8].items()):
+    print((s, otfg_str))
 
     psp = PspOtfg(s, otfg_str)
 
-    print "  ", psp
+    print(("  ", psp))
 

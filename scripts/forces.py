@@ -32,8 +32,8 @@ if __name__ == "__main__":
   blocks = force_block.findall(c)
 
   atoms = sorted(find_atoms(blocks[len(blocks)-1]),
-                 key=lambda (s,i,x,y,z,_x,_y,_z,n): n,
+                 key=lambda s_i_x_y_z__x__y__z_n: s_i_x_y_z__x__y__z_n[8],
                  reverse=True)
 
   for s, i, x, y, z, x_, y_, z_, n in atoms[:10]:
-    print n, "->", s, i, x, y, z
+    print((n, "->", s, i, x, y, z))

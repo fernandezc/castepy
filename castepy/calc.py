@@ -1,15 +1,15 @@
 import os, sys
 
-from input.parameters import Parameters
-from input.cell import Cell
-from output.nmr import MagresResult
+from .input.parameters import Parameters
+from .input.cell import Cell
+from .output.nmr import MagresResult
 from magres.oldmagres import OldMagres
 
-from output.finished import error_check, castep_finished
+from .output.finished import error_check, castep_finished
 
-import output.energy
-import output.bonds
-import output.mulliken
+from . import output.energy
+from . import output.bonds
+from . import output.mulliken
 
 def calcs_on_path(dir, load=False):
   from util import find_all_calcs, calc_from_path
@@ -43,7 +43,7 @@ class CastepCalc:
 
     self.files = []
 
-    for t, file in self.types.items():
+    for t, file in list(self.types.items()):
       file_path = os.path.join(root, file % name)
       if os.path.isfile(file_path):
         self.files.append(file_path)
@@ -72,11 +72,11 @@ class CastepCalc:
 
     cell_path = os.path.join(dir, seedname + ".cell")
     f_cell = open(os.path.join(dir, seedname + ".cell"))
-    print >>f_cell, self.cell
+    print(self.cell, file=f_cell)
 
     param_path = os.path.join(dir, seedname + ".param")
     f_param = open(os.path.join(dir, seedname + ".param"))
-    print >>f_param, self.params
+    print(self.params, file=f_param)
 
     return (cell_path, param_path)
 
@@ -108,7 +108,7 @@ class CastepCalc:
         #self.magres_file.data_dict = old_magres_file.as_new_format()
         self.magres.magres_file = old_magres_file.as_new_format()
 
-        print self.magres
+        print(self.magres)
 
     if hasattr(self, 'castep_file') and "bonds" in to_load:
         try:

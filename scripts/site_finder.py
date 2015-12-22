@@ -34,12 +34,12 @@ for ion in cell.ions.get_species(s):
 site_votes = dict(((ion.s, ion.i), Counter()) for ion in ions)
 
 for i in range(1):
-  print >>sys.stderr, "Try %d" % i
+  print("Try %d" % i, file=sys.stderr)
 
   means = kmeans(points, k, 1e-12)
 
   for mean in means:
-    print >>meanfiles, " ".join(map(str,mean))
+    print(" ".join(map(str,mean)), file=meanfiles)
 
   #for mean in means:
   #  print mean
@@ -47,7 +47,7 @@ for i in range(1):
   classification = classify(points, means)
   
 
-  print classification
+  print(classification)
 
   sites = {('F', 13): 'F1',
            ('F', 1): 'F2',
@@ -56,7 +56,7 @@ for i in range(1):
            ('F', 21): 'F5',}
 
   site_map = {}
-  for index, site_name in sites.items():
+  for index, site_name in list(sites.items()):
     site_class = classification[ion_index[index]]
     site_map[site_class] = site_name
 
@@ -65,10 +65,10 @@ for i in range(1):
 
 ion_site_map = {}
 
-for index, counter in sorted(site_votes.items(), key=lambda (i,c): i):
+for index, counter in sorted(list(site_votes.items()), key=lambda i_c: i_c[0]):
   ion_site_map[index] = counter.most_common(1)[0][0]
   
-  print >>pfile, ion_site_map[index], " ".join(map(str,points[ion_index[index]]))
+  print(ion_site_map[index], " ".join(map(str,points[ion_index[index]])), file=pfile)
 
-print pickle.dumps(ion_site_map)
+print(pickle.dumps(ion_site_map))
 

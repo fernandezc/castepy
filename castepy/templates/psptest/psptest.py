@@ -49,9 +49,9 @@ def make(source_ascpot, source_aeps, target_dir, **kwargs):
 
   sh_source = open(os.path.join(psptest_path, "psptest.sh")).read()
 
-  print >>open(sh_target, "w+"), sh_source % sh_context
+  print(sh_source % sh_context, file=open(sh_target, "w+"))
   shutil.copyfile(os.path.join(psptest_path, "psptest.param"), param_target)
-  print >>open(cell_target, "w+"), str(cell)
+  print(str(cell), file=open(cell_target, "w+"))
   
   cell_target = os.path.join(dir_ncp, "%s.cell" % target_name)
   param_target = os.path.join(dir_ncp, "%s.param" % target_name)
@@ -64,9 +64,9 @@ def make(source_ascpot, source_aeps, target_dir, **kwargs):
 
   cell.blocks['SPECIES_POT'] = ["%s %s_POT.ASC.DAT" % (s, s)]
 
-  print >>open(sh_target, "w+"), sh_source % sh_context
+  print(sh_source % sh_context, file=open(sh_target, "w+"))
   shutil.copyfile(os.path.join(psptest_path, "psptest.param"), param_target)
-  print >>open(cell_target, "w+"), str(cell)
+  print(str(cell), file=open(cell_target, "w+"))
 
 if __name__ == "__main__":
   dir, name = calc_from_path(sys.argv[1])

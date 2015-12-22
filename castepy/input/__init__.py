@@ -1,3 +1,3 @@
-from cell import Cell
-from parameters import Parameters
+from .cell import Cell
+from .parameters import Parameters
 

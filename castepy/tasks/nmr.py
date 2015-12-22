@@ -85,7 +85,7 @@ class NMRTask(object):
          open(param_target, "w+") as param_target_file,\
          open(cell_target, "w+") as cell_target_file:
 
-      print >>sh_target_file, submission_script
-      print >>param_target_file, self.params
-      print >>cell_target_file, self.cell
+      print(submission_script, file=sh_target_file)
+      print(self.params, file=param_target_file)
+      print(self.cell, file=cell_target_file)
 

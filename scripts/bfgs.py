@@ -29,6 +29,6 @@ def read_castep_file(castep_file):
 if __name__ == "__main__":
   steps = read_castep_file(open(sys.argv[1]).read())
 
-  print "#N", " ".join([str(s['param']) for s in steps[0]])
+  print(("#N", " ".join([str(s['param']) for s in steps[0]])))
   for i, step in enumerate(steps):
-    print i, " ".join([str(s['value']) for s in step])
+    print((i, " ".join([str(s['value']) for s in step])))

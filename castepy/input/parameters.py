@@ -1,7 +1,7 @@
 import re
 import os.path
 
-from valid_params import valid_params
+from .valid_params import valid_params
 
 def makeparam(ss):
   try:
@@ -18,7 +18,7 @@ def makeparam(ss):
         except:
           return str(s)
 
-    ss_conv = map(try_cast, ss)
+    ss_conv = list(map(try_cast, ss))
 
     return ss_conv
 
@@ -96,6 +96,6 @@ class Parameters:
 
   def __str__(self):
     lines = []
-    lines += ["%s: %s" % (n , " ".join(map(str,v))) for n, v in self.params.items()]
+    lines += ["%s: %s" % (n , " ".join(map(str,v))) for n, v in list(self.params.items())]
     lines += self.comments
     return "\n".join(lines)

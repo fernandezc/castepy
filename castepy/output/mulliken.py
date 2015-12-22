@@ -20,7 +20,7 @@ class MullikenResult(object):
         line_s = line.split()
         s = line_s[0]
         i = int(line_s[1])
-        charge_s, charge_p, charge_d, charge_f, tot, charge = map(float, line_s[2:])
+        charge_s, charge_p, charge_d, charge_f, tot, charge = list(map(float, line_s[2:]))
 
         result.charges[(s,i)] = {'charge_s': charge_s,
                                'charge_p': charge_p,
@@ -39,5 +39,5 @@ class MullikenResult(object):
 
 if __name__ == "__main__":
   results = MullikenResult.load(open(sys.argv[1]).read())
-  print results[0].charges
+  print((results[0].charges))
 

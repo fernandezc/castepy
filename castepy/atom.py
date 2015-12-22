@@ -1,9 +1,9 @@
 import numpy
 import math
 
-import constants
+from . import constants
 
-from decorators import lazyproperty
+from .decorators import lazyproperty
 
 class Atom(object):
   def __init__(self, species, index, position, label=None):
@@ -96,7 +96,7 @@ class AtomImage(object):
     return str(self.atom)
   
   def __unicode__(self):
-    return unicode(self.atom)
+    return str(self.atom)
 
   def __getattribute__(self, name):
     if name == "atom":

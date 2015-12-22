@@ -55,9 +55,9 @@ for var_name, values in vars:
 
   try:
     if any(['.' in value for value in values]):
-      values = map(float, values)
+      values = list(map(float, values))
     else:
-      values = map(int, values)
+      values = list(map(int, values))
 
   except ValueError:
     pass
@@ -69,7 +69,7 @@ num_calcs = 0
 
 # Take inner product of all our arguments and produce a dictionary of values
 for vars_value in list(itertools.product(*[values for var_name, values in vars_values])):
-  template_context = dict(zip([var_name for var_name, _ in vars_values], vars_value))
+  template_context = dict(list(zip([var_name for var_name, _ in vars_values], vars_value)))
 
   # Generate name from varying arguments
   name = []
@@ -101,9 +101,9 @@ for vars_value in list(itertools.product(*[values for var_name, values in vars_v
     #print source_target
     #print source_content
     #print template_context
-    print >>open(source_target, "w+"), source_content.format(**template_context), 
+    print(source_content.format(**template_context), end=' ', file=open(source_target, "w+")) 
 
   num_calcs += 1
 
-print "{0} calculations written to {1}".format(num_calcs, target_dir)
+print("{0} calculations written to {1}".format(num_calcs, target_dir))
 

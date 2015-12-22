@@ -13,25 +13,25 @@ def make_submit_all_script(root_dir, runs):
   script = open(script_path, "w+")
 
   for target_dir, name in runs:
-    print >>script, "cd %s" % target_dir
-    print >>script, "qsub %s.sh" % name
-    print >>script, "cd .."
+    print("cd %s" % target_dir, file=script)
+    print("qsub %s.sh" % name, file=script)
+    print("cd ..", file=script)
 
-  os.chmod(script_path, 0755)
+  os.chmod(script_path, 0o755)
 
 def make_magres_accum_script(root_dir, root_name, runs):
   script_path = os.path.join(root_dir, "magres_accum.sh")
   script = open(script_path, "w+")
 
   for target_dir, name in runs:
-    print >>script, "grep isc %s/%s.magres >> %s-isc.magres" % (target_dir, name, root_name)
+    print("grep isc %s/%s.magres >> %s-isc.magres" % (target_dir, name, root_name), file=script)
 
-  os.chmod(script_path, 0755) 
+  os.chmod(script_path, 0o755) 
 
 if __name__ == "__main__":
   source_dir, name = calc_from_path(sys.argv[1])
   target_dir_prefix = sys.argv[2]
-  species = map(parse_species, sys.argv[3:])
+  species = list(map(parse_species, sys.argv[3:]))
 
   if not os.path.isdir(target_dir_prefix):
     os.mkdir(target_dir_prefix)
